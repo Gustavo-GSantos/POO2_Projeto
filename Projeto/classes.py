@@ -1,4 +1,5 @@
 #Primeiras classes e métodos identificados
+from Tecidos import tecidos
 
 class Cliente:
 
@@ -25,19 +26,23 @@ class Cliente:
 class Mascara: #TODO: Mudar nome pra class Tecido? Já que os primeiros métodos são mais focados nisso
                #TODO: e considerando que as máscaras tem outros atributos como preço e tamanho
 
-    # Deve conter informações sobre as máscaras, podendo 
-    # adicionar novos tecidos
+    # Deve conter informações sobre as máscaras
     # Valores serão fixos (tipo1 = 5 reais, tipo2 = 10 reais)
 
-    def __init__(self):
-        pass
+    def __init__(self, ID:int, tecido, tipo, tamanho:str):
+        self.ID = ID
+        self.tecido = tecido
+        self.tipo = tipo
+        if tipo == 'tipo1':
+            vtipo = 5
+        else:
+            vtipo = 10
+        self.valor = vtipo
+        self.tamanho = tamanho
     
-    def novo_tecido(self, nome_tecido, foto_tecido):
-        self.nome_tecido = nome_tecido
-        self.foto_tecido = foto_tecido
-        
-    def retorna_nome_tecido(self): #função pra identificar o tecido pelo nome ou palavras chave
-        return self.nome_tecido
+    def retorna_informações_mascara(self):
+        return self.ID, self.tecido, self.tipo, self.valor, self.tamanho
+
 
 class Pedido:
 
@@ -47,13 +52,18 @@ class Pedido:
     # caso contrário é indeterminado), valor total do pedido
     # e lista de máscaras solicitadas
 
-    def __init__(self):
-        pass
+    def __init__(self, cliente, mascaras=[]):   #pra cada máscara existe um tecido e um tamanho que podem
+        self.cliente = cliente                  #variar de acordo com cada pedido.
+        self.mascaras = mascaras
+        self.__vtotal = 0 # Atributo privado.
+        for mascara in mascaras:                    
+            self.__vtotal += mascara.valor          
+        self.__valor_total = self.__vtotal # Atributo privado sem metodo setter para não haver mudanças fora da instanciação.
     
-    def criar_pedido(self, cliente): #pra cada máscara existe um tecido e um tamanho que podem
-                                     #variar de acordo com cada pedido.
-                                     #TODO: como fazer para a cada máscara diferente poder inserir o tamanho e o tecido?
-        pass
+    @property                       # 
+    def valor_total(self):          # Essa parte serve para retornar o valor privado
+        return self.__valor_total   #
+
 
 cliente1 = Cliente('Marcos', 123, 'Rua 123') #Instancia o cliente
 cliente2 = Cliente('Maria', 321, 'Rua 321')
@@ -63,3 +73,15 @@ print(cliente1.retorna_info_cliente()) #Imprime todas as informações do Client
 l = cliente2.retorna_info_cliente()
 print(l[0]) #Imprime o nome
 print(l[1]) #Imprime o telefone
+
+mascara1 = Mascara(1, tecidos.tecido1, 'tipo1', 'Pequeno')
+mascara2 = Mascara(2, tecidos.tecido2, 'tipo2', 'Medio')
+
+t = mascara1.retorna_informações_mascara()
+print(t[1])
+print(t)
+
+pedido1 = Pedido(cliente1, [Mascara(3, tecidos.tecido3, 'tipo2', 'Medio'), Mascara(4, tecidos.tecido1, 'tipo1', 'Pequeno')])
+pedido2 = Pedido(cliente2, [mascara1, mascara2, mascara2, mascara2, mascara1])
+print(f'Pedido 1: {pedido1.valor_total}')
+print(f'Pedido 2: {pedido2.valor_total}')
