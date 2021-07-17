@@ -40,7 +40,7 @@ class Mascara: #TODO: Mudar nome pra class Tecido? Já que os primeiros métodos
         self.valor = vtipo
         self.tamanho = tamanho
     
-    def retorna_informações_mascara(self):
+    def retorna_info_mascara(self):
         return self.ID, self.tecido, self.tipo, self.valor, self.tamanho
 
 
@@ -77,7 +77,7 @@ print(l[1]) #Imprime o telefone
 mascara1 = Mascara(1, tecidos.tecido1, 'tipo1', 'Pequeno')
 mascara2 = Mascara(2, tecidos.tecido2, 'tipo2', 'Medio')
 
-t = mascara1.retorna_informações_mascara()
+t = mascara1.retorna_info_mascara()
 print(t[1])
 print(t)
 
