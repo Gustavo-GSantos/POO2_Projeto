@@ -3,6 +3,10 @@ from django.db import models
 from django.urls import reverse
 
 
+class ProdutoManager(models.Manager):
+    def get_queryset(self):
+        return super(ProdutoManager, self).get_queryset().filter(disponivel=True)
+
 class Categoria(models.Model):
     nomeCategoria = models.CharField(max_length=255, db_index=True)
     slugCategoria = models.SlugField(max_length=255, unique=True)
@@ -30,6 +34,8 @@ class Produto(models.Model):
     disponivel = models.BooleanField(default=True)
     criado = models.DateTimeField(auto_now_add=True)
     atualizado = models.DateTimeField(auto_now=True)
+    objects = models.Manager()
+    produtos = ProdutoManager()
 
     class Meta:
         verbose_name_plural = 'Produtos'

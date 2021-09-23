@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'store',
+    'carrinho',
 ]
 
 MIDDLEWARE = [
@@ -52,7 +53,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'store.views.categorias'
+                'store.context_processors.categorias',
+                'carrinho.context_processors.carrinho',
             ],
         },
     },

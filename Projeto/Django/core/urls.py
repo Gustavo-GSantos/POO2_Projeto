@@ -6,6 +6,7 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('store.urls', namespace='store')),
+    path('carrinho/', include('carrinho.urls', namespace='carrinho')),
 ]
 
 if settings.DEBUG:

@@ -26,16 +26,16 @@
                             <div class="col-6">
                                 <label for="select">Qtd</label>
                                 <select id="select">
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                    <option value="">3</option>
-                                    <option value="">4</option>
-                                    <option value="">5</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
                                 </select>
 
                             </div>
-                            <div class="col-6 text-end"><button type="button" class="btn btn-secondary btn-sm">Adicionar ao
-                                    Carrinho</button></div>
+                            <div class="col-6 text-end"><button type="button" id="add-button" value="{{produto.id}}" 
+                                class="btn btn-secondary btn-sm">Adicionar ao Carrinho</button></div>
                         </div>
                     </div>
                 </div>
@@ -44,4 +44,25 @@
     </main>
 
 </div>
+
+<script>
+    $(document).on('click', '#add-button', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '{% url "carrinho:carrinho_add" %}',
+            data: {
+                produtoid: $('#add-button').val(),
+                produtoqtd: $('#select option:selected').text(),
+                csrfmiddlewaretoken: "{{csrf_token}}",
+                action: 'post'
+            },
+            success: function (json) {
+               document.getElementById("carrinho-qtd").innerHTML = json.qtd
+            },
+            error: function (xhr, errmsg, err) {}
+        });
+    })
+</script>
+
 {% endblock %}
