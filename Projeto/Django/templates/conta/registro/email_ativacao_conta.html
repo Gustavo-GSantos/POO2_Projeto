@@ -1,0 +1,7 @@
+{% autoescape off %}
+Olá {{ usuario.user_name }},
+
+Conta criada com sucesso. Clique no link abaixo para ativá-la.
+
+http://{{ dominio }}{% url 'conta:ativar' uidb64=uid token=token %}
+{% endautoescape %}

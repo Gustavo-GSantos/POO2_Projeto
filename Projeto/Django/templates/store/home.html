@@ -2,51 +2,31 @@
 {% load static %}
 {% block title %}Pedidos de Mascaras{% endblock %}
 {% block content %}
-
-
 <main>
-
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="h1 fw-bold">Sistema criado para pedidos de máscaras</h1>
-        <p class="lead text-muted">Testando o textão</p>
-        <p>
-          <a href="#" class="btn btn-primary my-2">Criar Conta</a>
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <div class="album py-5 bg-light">
     <div class="container">
-
-      <div class="pb-3 h5">Todas as Máscaras</div>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
-
-        {% for produto in produtos %}
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <img class="img-fluid" alt="Responsive image" src="{{ produto.imagem.url }}">
-            <div class="card-body">
-              <p class="card-text">
-                <a class="text-dark text-decoration-none" href="{{ produto.get_absolute_url }}">{{ produto.nomeProduto }}</a>
-              </p>
-              <div class="d-flex justify-content-between align-items-center">
-                <small class="text-muted">teste</small>
+      <div class="row">
+        <div class="album py-5">
+          <div class="pb-3">
+            <h1 class="h3">Popular</h1>
+          </div>
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+            {% for produto in produtos %}
+            <div class="col">
+              <div class="card border-0">
+                <img class="img-fluid" alt="Responsive image" src="{{ produto.imagem.url }}">
+                <div class="card-body px-0">
+                  <p class="card-text">
+                    <a class="text-dark text-decoration-none"
+                      href="{{ produto.get_absolute_url }}">{{ produto.nomeProduto|slice:":50" }}</a>
+                  </p>
+                  <div class="fw-bold">R${{produto.preco}}</div>
+                </div>
               </div>
             </div>
+            {% endfor %}
           </div>
         </div>
-
-        {% endfor %}
-
       </div>
     </div>
-  </div>
-
-
 </main>
-
 {% endblock %}

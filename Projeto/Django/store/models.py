@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
 
@@ -23,7 +23,7 @@ class Categoria(models.Model):
 
 class Produto(models.Model):
     categoria = models.ForeignKey(Categoria, related_name="produto", on_delete=models.CASCADE)
-    criado_por = models.ForeignKey(User, on_delete=models.CASCADE, related_name="criador_produto")
+    criado_por = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="criador_produto")
     nomeProduto = models.CharField(max_length=255)
     autor = models.CharField(max_length=255, default='Administrador')
     descricao = models.TextField(blank=True)

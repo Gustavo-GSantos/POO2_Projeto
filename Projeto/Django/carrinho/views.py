@@ -6,7 +6,7 @@ from store.models import Produto
 
 def carrinho_resumo(request):
     carrinho = Carrinho(request)
-    return render(request, 'store/carrinho/resumo.html', {'carrinho': carrinho})
+    return render(request, 'carrinho/resumo.html', {'carrinho': carrinho})
 
 
 def carrinho_add(request):
