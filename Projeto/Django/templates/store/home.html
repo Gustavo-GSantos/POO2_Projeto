@@ -13,11 +13,21 @@
             {% for produto in produtos %}
             <div class="col">
               <div class="card border-0">
-                <img class="img-fluid" alt="Responsive image" src="{{ produto.imagem.url }}">
+                <div class="dropdown">
+                  <a  href="{{ produto.get_absolute_url }}">
+                   <img class="img-fluid" alt="Responsive image" src="{{ produto.imagem.url }}">
+                  </a>
+                  <div class="dropdown-content">
+                    <a href="{{ produto.get_absolute_url }}" style="text-decoration: none;color: black">
+                      <img class="img-static" alt="Static image" width="450" height="300" src="{{ produto.imagem.url }}">
+                      <div class="desc">{{ produto.nomeProduto }}</div>
+                    </a>
+                  </div>
+                </div>
                 <div class="card-body px-0">
                   <p class="card-text">
                     <a class="text-dark text-decoration-none"
-                      href="{{ produto.get_absolute_url }}">{{ produto.nomeProduto|slice:":50" }}</a>
+                      href="{{ produto.get_absolute_url }}"><span class="fw-bold">{{ produto.nomeProduto|slice:":50" }}</span></a>
                   </p>
                   <div class="fw-bold">R${{produto.preco}}</div>
                 </div>

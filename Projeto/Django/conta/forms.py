@@ -8,14 +8,9 @@ from .models import BaseDeUsuarios
 class UserLoginForm(AuthenticationForm):
 
     usuario = forms.CharField(widget=forms.TextInput(
-        attrs={'class': 'form-control mb-3', 'placeholder': 'E-mail', 'id': 'login-usuario'}))
+        attrs={'class': 'form-control mb-3', 'placeholder': 'Usuário', 'id': 'login-usuario'}))
     senha = forms.CharField(widget=forms.PasswordInput(
-        attrs={
-            'class': 'form-control',
-            'placeholder': 'Senha',
-            'id': 'login-senha',
-        }
-    ))
+        attrs={'class': 'form-control', 'placeholder': 'Senha', 'id': 'login-senha'}))
 
 
 class RegistrationForm(forms.ModelForm):
@@ -25,19 +20,18 @@ class RegistrationForm(forms.ModelForm):
     email = forms.EmailField(max_length=100, help_text='Obrigatório', error_messages={
         'obrigatório': 'Email é um campo obrigatório!'})
     senha = forms.CharField(label='Senha', widget=forms.PasswordInput)
-    senha2 = forms.CharField(
-        label='Repetir senha', widget=forms.PasswordInput)
+    senha2 = forms.CharField(label='Repetir senha', widget=forms.PasswordInput)
 
     class Meta:
         model = BaseDeUsuarios
         fields = ('user_name', 'email',)
 
     def clean_username(self):
-        usuario = self.cleaned_data['user_name'].lower()
-        r = BaseDeUsuarios.objects.filter(user_name=usuario)
+        user_name = self.cleaned_data['user_name'].lower()
+        r = BaseDeUsuarios.objects.filter(user_name=user_name)
         if r.count():
             raise forms.ValidationError("Esse usuário já existe!")
-        return usuario
+        return user_name
 
     def clean_password2(self):
         cd = self.cleaned_data

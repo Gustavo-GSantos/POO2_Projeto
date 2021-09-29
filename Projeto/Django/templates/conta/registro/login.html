@@ -31,17 +31,27 @@
                                 {% csrf_token %}
                                 <h3 class="mb-4">Sign In</h3>
 
+
+
+
+
+
                                 {% if form.errors %}
-                                <div class="alert alert-primary" role="alert">
-                                    Usuário ou senha inválido!
-                                </div>
+                                    {% for field, errors in form.errors.items %}
+                                        {% for error in errors %}
+                                           <li>{{ error }}</li>
+                                            <div class="alert alert-primary" role="alert">
+                                               Usuário ou senha inválido!
+                                            </div>
+                                        {% endfor %}
+                                    {%  endfor %}
                                 {% endif %}
 
                                 <label class="form-label">{{ form.usuario.label}}</label>
-                                {{ form.usuario}}
+                                {{ form.usuario }}
 
                                 <label class="form-label">{{ form.senha.label}}</label>
-                                {{ form.senha}}
+                                {{ form.senha }}
                                 <div class="d-grid gap-2">
                                     <input type="hidden" name="next" value="{{ next }}">
                                     <button class="btn btn-primary py-2 mb-4 mt-5 fw-bold" type="submit" value="Log-in">Logar

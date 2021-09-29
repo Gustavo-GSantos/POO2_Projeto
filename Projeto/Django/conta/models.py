@@ -65,5 +65,5 @@ class BaseDeUsuarios(AbstractBaseUser, PermissionsMixin):
             [self.email],
             fail_silently=False,)
 
-    def __str__(self) -> str:
+    def __str__(self):
         return self.user_name

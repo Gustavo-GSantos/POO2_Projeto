@@ -47,6 +47,9 @@ class Carrinho():
     def get_total_price(self):
         return sum(Decimal(item['preco']) * item['qtd'] for item in self.carrinho.values())
 
+    def get_subtotal_price(self):
+        return sum(Decimal(item['preco']) * item['qtd'] for item in self.carrinho.values())
+
     def delete(self, produto):
         produto_id = str(produto)
         

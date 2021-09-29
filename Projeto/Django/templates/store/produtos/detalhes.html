@@ -8,12 +8,12 @@
     <main class="pt-5">
         <div class="row g-3">
             <div class="col-md-5 col-lg-5 order-md-first bg-light">
-                <img class="img-fluid mx-auto d-block" width="200px" alt="Responsive image" src="{{ produto.imagem.url }}">
+                <img class="img-fluid mx-auto d-block" width="100%" height="auto" alt="Responsive image" src="{{ produto.imagem.url }}">
             </div>
             <div class="col-md-7 col-lg-7 ps-md-3 ps-lg-5">
                 <h1 class="mb-0 h4">{{ produto.nomeProduto }}</h1>
                 <p><span class="lead">{{ produto.autor }}</span> (Autor)</p>
-                <p>{{ produto.descricao|slice:":355" }}...</p>
+                <p>{{ produto.descricao|slice:":355" }}</p>
                 <div class="border">
                     <div class="col border-bottom">
                         <div class="row p-3">

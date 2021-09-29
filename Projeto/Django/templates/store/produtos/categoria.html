@@ -17,16 +17,28 @@
 
         <div class="col">
           <div class="card shadow-sm">
-          <img class="img-fluid" alt="Responsive image" src="{{ produto.imagem.url }}">
-
-            <div class="card-body">
-              <p class="card-text">
-                <a class="text-dark text-decoration-none" href="{{ produto.get_absolute_url }}">{{ produto.nomeProduto }}</a>
-              </p>
-              <div class="d-flex justify-content-between align-items-center">
-                <small class="text-muted">testingg</small>
+              <div class="dropdown">
+                <a  href="{{ produto.get_absolute_url }}">
+                  <img class="img-fluid" alt="Responsive image" src="{{ produto.imagem.url }}">
+                </a>
+                  <div class="dropdown-content">
+                    <a href="{{ produto.get_absolute_url }}" style="text-decoration: none;color: black">
+                        <img class="img-static" alt="Static image" width="600" height="400" src="{{ produto.imagem.url }}">
+                        <div class="desc">{{ produto.nomeProduto }}</div>
+                    </a>
+                  </div>
+                    <div class="card-body">
+                      <p class="card-text">
+                        <a class="text-dark text-decoration-none" href="{{ produto.get_absolute_url }}">
+                            <span class="fw-bold">{{ produto.nomeProduto }}</span>
+                            <div class="col-5 text-end"><span class="h5 fw-bold">R${{ produto.preco }}</span></div>
+                        </a>
+                      </p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">{{ produto.descricao|slice:":355" }}</small>
+                      </div>
+                    </div>
               </div>
-            </div>
           </div>
         </div>
 
