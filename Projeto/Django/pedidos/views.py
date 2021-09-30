@@ -1,5 +1,6 @@
 from django.http.response import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
 
 from carrinho.carrinho import Carrinho
 
@@ -22,12 +23,18 @@ def add(request):
             for item in carrinho:
                 PedidoItem.objects.create(pedido_id=pedido_id, produto=item['produto'], preco=item['preco'],
                                         quantidade=item['qtd'])
-        
+
         response = JsonResponse({'sucess': 'retornar response'})
         return response
-    
-def confirmar_pagamento(data):
-    Pedido.objects.filter(pedido_key=data).update(status_pagamento=True)
+
+
+def confirmar_pedido(request):
+    carrinho = Carrinho(request)
+    carrinho.clear()
+    return render(request, 'pedidos/pedidoconfirmado.html')
+
+def carrinho(request):
+    return {'carrinho': Carrinho(request)}
 
 def usuario_pedidos(request):
     usuario_id = request.user.id

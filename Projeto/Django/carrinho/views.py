@@ -46,3 +46,8 @@ def carrinho_update(request):
         totalcarrinho = carrinho.get_total_price()
         response = JsonResponse({'qtd': carrinhoqtd, 'subtotal': totalcarrinho})
         return response
+
+def pedido_confirmado(request):
+    carrinho = Carrinho(request)
+    carrinho.clear()
+    return render(request, 'pedidoconfirmado.html')

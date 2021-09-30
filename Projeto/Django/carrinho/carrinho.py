@@ -57,6 +57,14 @@ class Carrinho():
             del self.carrinho[produto_id]
             print(produto_id)
             self.save()
-    
+
+    def clear(self):
+        from django.conf import settings
+        del self.session[settings.ID_SESSAO_CARRINHO]
+        self.save()
+
     def save(self):
         self.session.modified = True
+
+    def carrinho(request):
+        return {'carrinho': Carrinho(request)}

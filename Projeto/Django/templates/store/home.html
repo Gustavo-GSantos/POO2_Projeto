@@ -5,14 +5,14 @@
 <main>
     <div class="container">
       <div class="row">
-        <div class="album py-5">
+        <div class="album py-5 bg-light">
           <div class="pb-3">
             <h1 class="h3">Popular</h1>
           </div>
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
             {% for produto in produtos %}
             <div class="col">
-              <div class="card border-0">
+              <div class="card shadow-sm">
                 <div class="dropdown">
                   <a  href="{{ produto.get_absolute_url }}">
                    <img class="img-fluid" alt="Responsive image" src="{{ produto.imagem.url }}">
